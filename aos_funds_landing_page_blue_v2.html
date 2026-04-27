@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --blue: #1A3A6B;
+    --blue-mid: #2352A0;
+    --blue-light: #3A6CC8;
+    --blue-pale: #C8D9F0;
+    --white: #FFFFFF;
+    --off-white: #D6E0EE;
+    --border: rgba(26,58,107,0.3);
+    --text: #0D1F3C;
+    --muted: #3A4E6B;
+    --card: #FFFFFF;
+  }
+  body {
+    background: var(--white);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    padding: 28px 24px;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--white);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--blue);
+    text-transform: uppercase;
+  }
+  .hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    margin-bottom: 24px;
+    display: block;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+  .hero h1 em { font-style: italic; color: var(--blue-mid); }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 auto 36px; line-height: 1.8; }
+  .price-badge { display: inline-flex; flex-direction: column; align-items: center; margin-bottom: 32px; }
+  .was { font-size: 13px; color: var(--muted); text-decoration: line-through; letter-spacing: 0.05em; }
+  .price-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 600;
+    color: var(--blue);
+    line-height: 1;
+  }
+  .price-note { font-size: 12px; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+  .cta-btn {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 44px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: var(--blue-mid); }
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .divider-line { flex: 1; height: 0.5px; background: var(--border); }
+  .divider-text { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  section { padding: 72px 24px; max-width: 860px; margin: 0 auto; }
+  .section-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 12px; display: block; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 600; line-height: 1.15; margin-bottom: 16px; color: var(--text); }
+  .section-sub { font-size: 15px; color: var(--muted); max-width: 560px; margin-bottom: 48px; line-height: 1.8; }
+
+  /* PAIN */
+  .pain-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .pain-item {
+    background: var(--off-white);
+    padding: 14px 18px;
+    flex: 1 1 180px;
+  }
+  .pain-item p { font-size: 13px; color: var(--text); line-height: 1.5; font-weight: 400; }
+
+  /* HOW IT WORKS */
+  .how-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 48px; }
+  .step-card {
+    background: var(--off-white);
+    border: 0.5px solid var(--border);
+    padding: 32px 24px;
+    position: relative;
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: rgba(26,58,107,0.2);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .step-card h3 { font-size: 14px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 8px; color: var(--text); }
+  .step-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .step-arrow { position: absolute; top: 50%; right: -13px; transform: translateY(-50%); color: var(--blue-mid); font-size: 18px; z-index: 2; }
+
+  /* WHITE LABEL */
+  .wl-callout {
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wl-callout::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue-light); }
+  .wl-callout h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; margin-bottom: 16px; line-height: 1.2; color: #fff; }
+  .wl-callout h2 em { color: #A8C8F8; font-style: italic; }
+  .wl-callout p { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.8; margin-bottom: 24px; }
+  .wl-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px; }
+  @media (max-width: 600px) { .wl-two-col { grid-template-columns: 1fr; } }
+  .wl-col h4 { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #A8C8F8; margin-bottom: 16px; }
+  .wl-list { list-style: none; }
+  .wl-list li {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    padding: 8px 0;
+    border-bottom: 0.5px solid rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .wl-list li::before { content: ''; width: 4px; height: 4px; background: #A8C8F8; flex-shrink: 0; }
+
+  /* INSIDE */
+  .inside-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  .inside-item { background: var(--off-white); padding: 18px 16px; display: flex; align-items: flex-start; gap: 10px; }
+  .inside-dot { width: 5px; height: 5px; background: var(--blue-mid); flex-shrink: 0; margin-top: 7px; }
+  .inside-item span { font-size: 13px; color: var(--text); line-height: 1.5; font-weight: 400; }
+
+  /* STATS */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 64px;
+  }
+  .stat-item { background: var(--off-white); padding: 32px 24px; text-align: center; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 600; color: var(--blue); line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: 12px; color: var(--muted); letter-spacing: 0.05em; font-weight: 400; }
+
+  /* FAQ */
+  .faq-item { border-bottom: 0.5px solid var(--border); padding: 24px 0; }
+  .faq-q { font-size: 15px; font-weight: 500; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq-q span { color: var(--blue-mid); font-size: 18px; transition: transform 0.2s; }
+  .faq-a { font-size: 14px; color: var(--muted); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; }
+  .faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
+  .faq-item.open .faq-q span { transform: rotate(45deg); }
+
+  /* CTA FOOTER */
+  .cta-footer { text-align: center; padding: 80px 24px; border-top: 0.5px solid var(--border); background: var(--off-white); }
+  .cta-footer h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 600; margin-bottom: 12px; line-height: 1.15; color: var(--text); }
+  .cta-footer h2 em { color: var(--blue-mid); font-style: italic; }
+  .cta-footer p { font-size: 15px; color: var(--muted); margin-bottom: 36px; }
+
+  .disclaimer { background: var(--white); text-align: center; padding: 24px 24px 48px; font-size: 11px; color: var(--muted); line-height: 1.7; max-width: 700px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<nav><span class="logo">AOS Funds</span></nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="eyebrow">Ace's Skool of Business — $500 Access</span>
+  <h1>Start a business<br>with a backend <em>already<br>built for you.</em></h1>
+  <p>You own the front end. We handle everything behind it. Bring clients in — we fulfill. You earn per deal closed.</p>
+  <div class="price-badge">
+    <span class="was">Was $1,500</span>
+    <span class="price-main">$500</span>
+    <span class="price-note">One-time investment</span>
+  </div>
+  <br>
+  <a class="cta-btn" href="https://stan.store/Aosfunds/p/aces-skool-of-business" target="_blank">Get Access Now</a>
+</div>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <span class="divider-text">Does this sound like you?</span>
+  <div class="divider-line"></div>
+</div>
+
+<!-- PAIN -->
+<section style="padding-top: 40px; padding-bottom: 40px;">
+  <div class="pain-grid">
+    <div class="pain-item"><p>You've tried different models but nothing has stuck.</p></div>
+    <div class="pain-item"><p>You're doing the "right things" but not seeing results.</p></div>
+    <div class="pain-item"><p>You're tired of guessing what actually works.</p></div>
+    <div class="pain-item"><p>You want consistent clients but don't know how to get them.</p></div>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="divider-line"></div>
+  <span class="divider-text">Here's what changes</span>
+  <div class="divider-line"></div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section>
+  <span class="section-label">The model</span>
+  <h2 class="section-title">Simple. Clear. Already working.</h2>
+  <p class="section-sub">No building from scratch. No complicated backend. You plug into a live system and start from day one.</p>
+  <div class="how-steps">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h3>You bring the client</h3>
+      <p>Use content, social media, or ads to attract people who need funding or credit services.</p>
+      <span class="step-arrow">→</span>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h3>We handle fulfillment</h3>
+      <p>Our backend team takes care of everything — delivery, processing, client management.</p>
+      <span class="step-arrow">→</span>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h3>You get paid</h3>
+      <p>Earn a percentage on every deal closed. No chasing. No guessing. Just results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div style="max-width:860px; margin: 0 auto; padding: 0 24px;">
+  <div class="stat-row">
+    <div class="stat-item">
+      <div class="stat-num">$8M+</div>
+      <div class="stat-label">Deployed to clients via our backend</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">$1K–3K</div>
+      <div class="stat-label">Earned per deal closed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">$500</div>
+      <div class="stat-label">One-time investment to get started</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHITE LABEL -->
+<section>
+  <div class="wl-callout">
+    <h2>You own the <em>entire front end</em><br>of this business.</h2>
+    <p>This is a white label model. Your brand, your client relationships, your income — that's all yours. You're not working for us. You're running your own business with our infrastructure powering it behind the scenes.</p>
+    <div class="wl-two-col">
+      <div class="wl-col">
+        <h4>What you own</h4>
+        <ul class="wl-list">
+          <li>Your brand &amp; client-facing identity</li>
+          <li>Your social media &amp; content</li>
+          <li>Your lead generation</li>
+          <li>Your client relationships</li>
+          <li>Your income per deal</li>
+        </ul>
+      </div>
+      <div class="wl-col">
+        <h4>What we handle</h4>
+        <ul class="wl-list">
+          <li>Backend fulfillment</li>
+          <li>Client delivery &amp; processing</li>
+          <li>CRM &amp; systems access</li>
+          <li>Onboarding &amp; support</li>
+          <li>Done-for-you content vault</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section>
+  <span class="section-label">What's inside</span>
+  <h2 class="section-title">Everything you need to<br>run the front end.</h2>
+  <p class="section-sub">Training, tools, and systems — all included in your $500 access. You learn while you earn.</p>
+  <div class="inside-grid">
+    <div class="inside-item"><div class="inside-dot"></div><span>DFY Fulfillment Onboarding</span></div>
+    <div class="inside-item"><div class="inside-dot"></div><span>DFY Content Vault</span></div>
+    <div class="inside-item"><div class="inside-dot"></div><span>Social Media Growth &amp; Lead Gen</span></div>
+    <div class="inside-item"><div class="inside-dot"></div><span>Meta Ads Training</span></div>
+    <div class="inside-item"><div class="inside-dot"></div><span>Sales &amp; Communication Scripts</span></div>
+    <div class="inside-item"><div class="inside-dot"></div><span>Website Creation Using AI</span></div>
+    <div class="inside-item"><div class="inside-dot"></div><span>Systems, Workflows &amp; Automation</span></div>
+    <div class="inside-item"><div class="inside-dot"></div><span>Skool Community Access</span></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <span class="section-label">Questions</span>
+  <h2 class="section-title">Answered honestly.</h2>
+  <div style="margin-top: 40px;">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">Do I need experience to start? <span>+</span></div>
+      <div class="faq-a">No. Everything is broken down step by step. You can follow along even if you've never run a business before.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">What exactly is my role? <span>+</span></div>
+      <div class="faq-a">Your role is bringing clients in. The backend team at AOS Funds handles all fulfillment. You focus on the front end — content, ads, conversations, and closing.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">How do I actually make money? <span>+</span></div>
+      <div class="faq-a">You earn a percentage per deal closed. Starter access earns 20% per closed deal. Upgrading to Tier 3 unlocks 30% per closed deal.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">Is this a white label business? <span>+</span></div>
+      <div class="faq-a">Yes. You own the front end entirely — your brand, your clients, your income. Our backend infrastructure powers the fulfillment side so you never have to build that yourself.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">How fast can I start? <span>+</span></div>
+      <div class="faq-a">You get instant access immediately after checkout. Everything is hosted inside the platform — you can start the same day.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">Are refunds available? <span>+</span></div>
+      <div class="faq-a">Due to the digital nature of the program and instant access to all materials, all sales are final. By purchasing you agree to our no-refund policy.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FOOTER -->
+<div class="cta-footer">
+  <h2>Everything you need is here.<br><em>The rest is execution.</em></h2>
+  <p>One investment. Real infrastructure. A business you actually own the front end of.</p>
+  <div class="price-badge" style="margin-bottom: 28px;">
+    <span class="was">Was $1,500</span>
+    <span class="price-main">$500</span>
+    <span class="price-note">One-time · Instant access</span>
+  </div>
+  <br>
+  <a class="cta-btn" href="https://stan.store/Aosfunds/p/aces-skool-of-business" target="_blank">Get Access Now</a>
+  <p style="margin-top: 20px; font-size: 12px; color: var(--muted);">Instant access after checkout &nbsp;·&nbsp; All sales final</p>
+</div>
+
+<div class="disclaimer">
+  By purchasing, you acknowledge that Ace's Skool of Business is a digital educational program and that access is granted immediately upon checkout. Results are not guaranteed and depend on your effort, consistency, and execution. All sales are final.
+</div>
+
+<script>
+  function toggle(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
