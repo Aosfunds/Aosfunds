@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariah Torres — Partner Access</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --white: #FAFAF7;
+    --cream: #F2EFE8;
+    --beige: #E8E0D0;
+    --beige-dark: #D4C9B8;
+    --sage: #7A9B8A;
+    --sage-light: #A8C4B4;
+    --sage-dark: #4A6B5A;
+    --blue: #4A6B8A;
+    --blue-light: #7A9BB4;
+    --blue-pale: #C8D8E4;
+    --text: #1A1A18;
+    --text-mid: #4A4A44;
+    --text-muted: #8A8A80;
+    --border: rgba(26,26,24,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250,250,247,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .nav-brand span { color: var(--sage); }
+  .nav-cta {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--text);
+    padding: 10px 24px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--sage-dark); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(122,155,138,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(74,107,138,0.08) 0%, transparent 50%),
+      var(--white);
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 32px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px;
+    height: 0.5px;
+    background: var(--sage);
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 7vw, 92px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    max-width: 820px;
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sage);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text-mid);
+    max-width: 520px;
+    line-height: 1.9;
+    margin-bottom: 52px;
+    position: relative;
+  }
+  .hero-price-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .price-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 88px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .price-detail {
+    padding-bottom: 12px;
+  }
+  .price-detail p {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .price-detail .was {
+    text-decoration: line-through;
+    color: var(--beige-dark);
+  }
+  .hero-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    position: relative;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--text);
+    color: var(--white);
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 18px 48px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--sage-dark); }
+  .btn-secondary {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--beige-dark);
+    padding-bottom: 2px;
+    transition: color 0.3s;
+  }
+  .btn-secondary:hover { color: var(--sage); }
+
+  /* ── DECORATIVE ELEMENT ── */
+  .hero-deco {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 340px;
+    height: 340px;
+    border: 0.5px solid var(--beige);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+  }
+  .hero-deco::before {
+    content: '';
+    width: 260px;
+    height: 260px;
+    border: 0.5px solid var(--beige-dark);
+    border-radius: 50%;
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 60px;
+    margin: 0 auto;
+  }
+  .divider-line { flex: 1; height: 0.5px; background: var(--border); }
+  .divider-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── SECTIONS ── */
+  .section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-tag::before { content: ''; width: 24px; height: 0.5px; background: var(--sage); }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 54px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .section-title em { font-style: italic; color: var(--sage); }
+  .section-body {
+    font-size: 16px;
+    color: var(--text-mid);
+    max-width: 640px;
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+
+  /* ── WHAT THIS IS ── */
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+    align-items: center;
+  }
+  .what-visual {
+    background: var(--cream);
+    border: 0.5px solid var(--beige);
+    padding: 48px;
+    position: relative;
+  }
+  .what-visual::before {
+    content: '';
+    position: absolute;
+    top: 16px; left: 16px; right: -16px; bottom: -16px;
+    border: 0.5px solid var(--beige);
+    z-index: -1;
+  }
+  .stat-item { margin-bottom: 36px; }
+  .stat-item:last-child { margin-bottom: 0; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-num span { color: var(--sage); }
+  .stat-label { font-size: 13px; color: var(--text-muted); letter-spacing: 0.05em; }
+
+  /* ── WHAT YOU GET ── */
+  .gets-section { background: var(--cream); padding: 100px 60px; }
+  .gets-inner { max-width: 1100px; margin: 0 auto; }
+  .gets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--beige);
+    border: 1px solid var(--beige);
+    margin-top: 60px;
+  }
+  .get-item {
+    background: var(--cream);
+    padding: 36px 32px;
+    transition: background 0.3s;
+  }
+  .get-item:hover { background: var(--white); }
+  .get-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--beige-dark);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .get-title {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .get-body { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .get-accent {
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: var(--sage);
+    margin-bottom: 14px;
+  }
+
+  /* ── HOW YOU GET PAID ── */
+  .pay-section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+  .pay-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 52px 0;
+    background: var(--cream);
+    border: 0.5px solid var(--beige);
+  }
+  .pay-step {
+    flex: 1;
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+  }
+  .pay-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--sage);
+    font-size: 18px;
+    z-index: 2;
+  }
+  .pay-step-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .pay-step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .examples-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .example-card {
+    border: 0.5px solid var(--beige);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .example-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage), var(--blue-light));
+  }
+  .example-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .example-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 14px;
+  }
+  .example-row:last-of-type { border-bottom: none; }
+  .example-row span:first-child { color: var(--text-muted); }
+  .example-row span:last-child { font-weight: 500; color: var(--text); }
+  .example-earn {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: var(--cream);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .example-earn span:first-child {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .example-earn span:last-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--sage-dark);
+  }
+
+  .upgrade-note {
+    margin-top: 40px;
+    padding: 32px 40px;
+    background: var(--text);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .upgrade-note p { font-size: 15px; line-height: 1.7; }
+  .upgrade-note strong { color: var(--sage-light); font-weight: 400; }
+  .upgrade-badge {
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    border: 0.5px solid var(--sage);
+    padding: 8px 16px;
+    white-space: nowrap;
+  }
+
+  /* ── CLOSE SUPPORT ── */
+  .support-section {
+    background: linear-gradient(135deg, var(--sage-dark) 0%, var(--blue) 100%);
+    padding: 100px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .support-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border: 0.5px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+  }
+  .support-inner { max-width: 1100px; margin: 0 auto; }
+  .support-section .section-tag { color: var(--sage-light); }
+  .support-section .section-tag::before { background: var(--sage-light); }
+  .support-section .section-title { color: var(--white); }
+  .support-section .section-title em { color: var(--sage-light); }
+  .support-section .section-body { color: rgba(255,255,255,0.75); }
+
+  /* ── FAQ ── */
+  .faq-section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+  .faq-grid { margin-top: 60px; }
+  .faq-item {
+    border-bottom: 0.5px solid var(--border);
+    padding: 28px 0;
+  }
+  .faq-q {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    letter-spacing: 0.01em;
+  }
+  .faq-icon {
+    width: 28px;
+    height: 28px;
+    border: 0.5px solid var(--beige-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--sage);
+    font-size: 18px;
+    transition: transform 0.3s;
+  }
+  .faq-a {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding-top: 16px; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--cream); }
+
+  /* ── CLOSING CTA ── */
+  .closing {
+    background: var(--cream);
+    padding: 120px 60px;
+    text-align: center;
+    border-top: 0.5px solid var(--beige);
+  }
+  .closing h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 68px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  .closing h2 em { font-style: italic; color: var(--sage); }
+  .closing p { font-size: 16px; color: var(--text-muted); margin-bottom: 48px; }
+  .closing-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .closing-note {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+  }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer {
+    padding: 32px 60px;
+    border-top: 0.5px solid var(--border);
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 28px 60px;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--text-muted);
+  }
+  .footer-note { font-size: 11px; color: var(--text-muted); letter-spacing: 0.1em; }
+
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .hero { padding: 120px 24px 60px; }
+    .hero-deco { display: none; }
+    .section { padding: 70px 24px; }
+    .gets-section { padding: 70px 24px; }
+    .gets-grid { grid-template-columns: 1fr; }
+    .what-grid { grid-template-columns: 1fr; }
+    .examples-grid { grid-template-columns: 1fr; }
+    .pay-flow { flex-direction: column; }
+    .pay-step:not(:last-child)::after { content: '↓'; right: auto; top: auto; bottom: -14px; left: 50%; transform: translateX(-50%); }
+    .support-section { padding: 70px 24px; }
+    .faq-section { padding: 70px 24px; }
+    .closing { padding: 80px 24px; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+    .upgrade-note { flex-direction: column; }
+    .section-divider { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Mariah Torres <span>/ AOS Funds</span></span>
+  <a class="nav-cta" href="https://stan.store/Aosfunds/p/aces-skool-of-business" target="_blank">Get Access — $500</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-deco"></div>
+  <span class="hero-eyebrow">Partner Access — One Time Investment</span>
+  <h1>Stop Building<br>From Scratch. Plug Into<br>a System That's <em>Already Working.</em></h1>
+  <p class="hero-sub">You build the front end. We handle everything behind it. One decision gets you access to infrastructure that took years to build.</p>
+  <div class="hero-price-row">
+    <span class="price-num">$500</span>
+    <div class="price-detail">
+      <p class="was">Was $1,500</p>
+      <p>One time investment</p>
+      <p>Instant access after purchase</p>
+    </div>
+  </div>
+  <div class="hero-cta-row">
+    <a class="btn-primary" href="https://stan.store/Aosfunds/p/aces-skool-of-business" target="_blank">Get Access Now</a>
+    <a class="btn-secondary" href="#what">See what's included</a>
+  </div>
+</section>
+
+<div class="section-divider">
+  <div class="divider-line"></div>
+  <span class="divider-label">What this actually is</span>
+  <div class="divider-line"></div>
+</div>
+
+<!-- WHAT THIS IS -->
+<section class="section">
+  <span class="section-tag">The Model</span>
+  <h2 class="section-title">You are not working for us.<br>You are running <em>your own business.</em></h2>
+  <p class="section-body">Most people spend years trying to figure out how to build a business. Testing offers, building systems, finding lenders, setting up processes — all while losing time and money.</p>
+  <p class="section-body">We already did that work. For $500 you get direct access to our infrastructure, our lender relationships, our systems, and our team. You build the front end of the business — the brand, the relationships, the clients. We handle everything on the backend.</p>
+
+  <div class="what-grid">
+    <div>
+      <p class="section-body" style="margin-top:0;">You are not working for us. You are running your own business with our foundation underneath it. This is a white label model. Nobody sees our name — they see yours.</p>
+      <p class="section-body">You build your brand, your audience, your client base. Our infrastructure powers what happens behind the scenes.</p>
+    </div>
+    <div class="what-visual">
+      <div class="stat-item">
+        <div class="stat-num">$8M<span>+</span></div>
+        <div class="stat-label">Deployed to clients via our backend systems</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Day <span>1</span></div>
+        <div class="stat-label">Operational from the moment you join</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Years of experience required to start</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider">
+  <div class="divider-line"></div>
+  <span class="divider-label">Everything included</span>
+  <div class="divider-line"></div>
+</div>
+
+<!-- WHAT YOU GET -->
+<div class="gets-section" id="what">
+  <div class="gets-inner">
+    <span class="section-tag">What You Get</span>
+    <h2 class="section-title">Everything you need to<br>run the <em>front end.</em></h2>
+    <p class="section-body">Your $500 investment gets you plugged into a live system from day one. Here is exactly what is waiting for you on the other side.</p>
+
+    <div class="gets-grid">
+      <div class="get-item">
+        <div class="get-num">01</div>
+        <div class="get-accent"></div>
+        <div class="get-title">Partner Onboarding</div>
+        <div class="get-body">You receive your own partner links to submit clients and a CRM to track every lead and client in your pipeline. Set up and operational from day one.</div>
+      </div>
+      <div class="get-item">
+        <div class="get-num">02</div>
+        <div class="get-accent"></div>
+        <div class="get-title">Lender Network & Relations</div>
+        <div class="get-body">You skip years of relationship building. Our lender network and backend connections become your leverage immediately.</div>
+      </div>
+      <div class="get-item">
+        <div class="get-num">03</div>
+        <div class="get-accent"></div>
+        <div class="get-title">Meta Ads Training</div>
+        <div class="get-body">Learn how to set up and run Meta ads from scratch. We show you exactly how to bring clients to your business using paid advertising.</div>
+      </div>
+      <div class="get-item">
+        <div class="get-num">04</div>
+        <div class="get-accent"></div>
+        <div class="get-title">AI Website Builder Training</div>
+        <div class="get-body">Build your own professional company website using AI. Your brand. Your presence. Built fast.</div>
+      </div>
+      <div class="get-item">
+        <div class="get-num">05</div>
+        <div class="get-accent"></div>
+        <div class="get-title">Video Industry Training</div>
+        <div class="get-body">Access video training that walks you through the industry so you understand what you are offering and can speak confidently with every client.</div>
+      </div>
+      <div class="get-item">
+        <div class="get-num">06</div>
+        <div class="get-accent"></div>
+        <div class="get-title">Community Access</div>
+        <div class="get-body">You are never building alone. Inside our community you get ongoing training, support, and updates as the system grows.</div>
+      </div>
+      <div class="get-item">
+        <div class="get-num">07</div>
+        <div class="get-accent"></div>
+        <div class="get-title">Full Backend Fulfillment</div>
+        <div class="get-body">Once your clients are submitted our team takes care of all the backend work. You focus on the front end — the relationships, the conversations, the growth.</div>
+      </div>
+      <div class="get-item">
+        <div class="get-num">08</div>
+        <div class="get-accent"></div>
+        <div class="get-title">50% Resell Commission</div>
+        <div class="get-body">Once you are inside you can invite others to join and earn 50% of every $500 sale. This is optional — not required.</div>
+      </div>
+      <div class="get-item">
+        <div class="get-num">09</div>
+        <div class="get-accent"></div>
+        <div class="get-title">Upgrade Anytime</div>
+        <div class="get-body">As you grow you can upgrade to a higher tier inside AOS Funds to earn more commission per closed client on the backend.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider" style="padding: 0 60px; margin-top: 0;">
+  <div class="divider-line"></div>
+  <span class="divider-label">How you earn</span>
+  <div class="divider-line"></div>
+</div>
+
+<!-- HOW YOU GET PAID -->
+<section class="pay-section">
+  <span class="section-tag">How You Get Paid</span>
+  <h2 class="section-title">Real numbers.<br><em>Real deals.</em></h2>
+  <p class="section-body">When a client is approved and funded our company collects a 12% success fee. Out of that fee you earn 30% for bringing the client in. You did the front end work. We did the backend work. You get paid for your part.</p>
+
+  <div class="pay-flow">
+    <div class="pay-step">
+      <div class="pay-step-label">Step 1</div>
+      <div class="pay-step-num">You bring<br>the client</div>
+    </div>
+    <div class="pay-step">
+      <div class="pay-step-label">Step 2</div>
+      <div class="pay-step-num">Client gets<br>approved & funded</div>
+    </div>
+    <div class="pay-step">
+      <div class="pay-step-label">Step 3</div>
+      <div class="pay-step-num">We collect<br>12% success fee</div>
+    </div>
+    <div class="pay-step">
+      <div class="pay-step-label">Step 4</div>
+      <div class="pay-step-num">You earn<br>30% of that fee</div>
+    </div>
+  </div>
+
+  <div class="examples-grid">
+    <div class="example-card">
+      <div class="example-label">Example 1 — Small Business Funding</div>
+      <div class="example-row"><span>Client funded amount</span><span>$50,000</span></div>
+      <div class="example-row"><span>12% success fee collected</span><span>$6,000</span></div>
+      <div class="example-row"><span>Your 30% of that fee</span><span style="color:var(--sage-dark)">$1,800</span></div>
+      <div class="example-earn">
+        <span>You earn</span>
+        <span>$1,800</span>
+      </div>
+    </div>
+    <div class="example-card">
+      <div class="example-label">Example 2 — Larger Business Funding</div>
+      <div class="example-row"><span>Client funded amount</span><span>$150,000</span></div>
+      <div class="example-row"><span>12% success fee collected</span><span>$18,000</span></div>
+      <div class="example-row"><span>Your 30% of that fee</span><span style="color:var(--sage-dark)">$5,400</span></div>
+      <div class="example-earn">
+        <span>You earn</span>
+        <span>$5,400</span>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:14px; color:var(--text-muted); margin-top:24px; font-style:italic;">These are real numbers based on real deals. The more clients you bring in the more you earn. There is no cap.</p>
+
+  <div class="upgrade-note">
+    <div class="upgrade-badge">Upgrade Anytime</div>
+    <p>Once you are inside AOS Funds you can upgrade to a higher tier at any time. <strong>Higher tiers unlock a greater commission percentage per closed deal</strong> on the backend. As your business grows your earning potential grows with it.</p>
+  </div>
+</section>
+
+<!-- CLOSE SUPPORT -->
+<div class="support-section">
+  <div class="support-inner">
+    <span class="section-tag">We Help You Close</span>
+    <h2 class="section-title">You will never be <em>left on your own.</em></h2>
+    <p class="section-body">If you are just getting started and book a client on our calendar our team will step in and help close so you can watch the process firsthand.</p>
+    <p class="section-body">This is how you go from learning to earning with confidence. You see it happen in real time. Then you run it yourself. The video training inside the community walks you through the industry so every conversation feels natural.</p>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <span class="section-tag">Questions</span>
+  <h2 class="section-title">Answered <em>honestly.</em></h2>
+
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">Do I need experience to start? <div class="faq-icon">+</div></div>
+      <div class="faq-a">No. This is built for people who are starting from zero. Everything is broken down step by step inside the community. You do not need a background in finance, sales, or business.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">What exactly is my role in this business? <div class="faq-icon">+</div></div>
+      <div class="faq-a">Your role is the front end. You build your brand, attract clients, and submit them through your partner link. Our team handles everything that happens after that. You focus on relationships. We focus on results.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">Am I growing your brand or my own? <div class="faq-icon">+</div></div>
+      <div class="faq-a">You are growing yours. This is a white label model. You build your own brand, your own audience, and your own client base. Our infrastructure powers what happens behind the scenes. Nobody sees our name — they see yours.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">What happens if I need more help or support? <div class="faq-icon">+</div></div>
+      <div class="faq-a">You have full access to our community where you can get support, ask questions, and access ongoing training. As the system grows new resources are added. You are not left on your own.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">What if I don't know how to sell the services? <div class="faq-icon">+</div></div>
+      <div class="faq-a">You will have access to video training that walks you through the industry so you understand what you are offering and can speak confidently with clients. If you book a client on our calendar in the early stages our team will step in and help close so you can watch the process firsthand.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">Are there refunds? <div class="faq-icon">+</div></div>
+      <div class="faq-a">Due to the nature of this program and the immediate access granted upon purchase all sales are final. This is a real business opportunity and the infrastructure is available to you from day one. Results depend on your consistency and execution.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OPTIONAL EARN — INVITE SECTION -->
+<div class="section-divider" style="padding: 0 60px;">
+  <div class="divider-line"></div>
+  <span class="divider-label">An extra way to earn</span>
+  <div class="divider-line"></div>
+</div>
+
+<section class="section" style="padding-top: 80px; padding-bottom: 80px;">
+  <span class="section-tag">Optional — Not Required</span>
+  <h2 class="section-title">Invite people into the system.<br><em>Earn 50% when they join.</em></h2>
+  <p class="section-body">Once you are inside AOS Funds you have the option to share access with others. If someone joins through your link you earn 50% of the $500 fee they paid — that is $250 per person who comes in.</p>
+  <p class="section-body">This is completely optional. The primary purpose of this program is to teach you how to run a real business and earn on the backend through closed deals. The invite option is simply an additional income stream available to you if you choose to use it.</p>
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--beige); border: 1px solid var(--beige); margin-top: 48px;">
+
+    <div style="background: var(--white); padding: 36px 32px;">
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--sage-dark); line-height: 1; margin-bottom: 12px;">$250</div>
+      <div style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">Earned every time someone joins through your link. No selling required — just sharing access to something real.</div>
+    </div>
+
+    <div style="background: var(--white); padding: 36px 32px;">
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--sage-dark); line-height: 1; margin-bottom: 12px;">50%</div>
+      <div style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">Of every $500 paid. No tiers to unlock. No minimum. Available to every partner from day one.</div>
+    </div>
+
+    <div style="background: var(--white); padding: 36px 32px;">
+      <div style="font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--sage-dark); line-height: 1; margin-bottom: 12px;">0</div>
+      <div style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">Required. This is not the focus of the program. It is simply an extra income layer available to you inside the system.</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top: 32px; padding: 32px 40px; background: var(--cream); border: 0.5px solid var(--beige); border-left: 3px solid var(--sage);">
+    <p style="font-size: 15px; color: var(--text-mid); line-height: 1.9;"><em style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--sage-dark);">"The primary way you earn is by bringing clients into the system and collecting your percentage of every closed deal. The invite option is a bonus — not the business model."</em></p>
+    <p style="font-size: 12px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 12px;">— Mariah Torres, AOS Funds</p>
+  </div>
+</section>
+
+<!-- CLOSING CTA -->
+<div class="closing">
+  <h2>The system is built.<br>The team is ready.<br><em>The only thing missing is you.</em></h2>
+  <p>One investment. Real infrastructure. A business you actually own the front end of.</p>
+  <div class="closing-price">$500</div>
+  <div class="closing-note">One time · Instant access · No recurring fees</div>
+  <a class="btn-primary" href="https://stan.store/Aosfunds/p/aces-skool-of-business" target="_blank">Get Access Now</a>
+</div>
+
+<div class="disclaimer">
+  By purchasing you acknowledge that this is a digital program and access is granted immediately upon checkout. Results are not guaranteed and depend on your effort, consistency, and execution. All sales are final.
+</div>
+
+<footer>
+  <span class="footer-brand">Mariah Torres / AOS Funds</span>
+  <span class="footer-note">Instant access after checkout &nbsp;·&nbsp; All sales final</span>
+</footer>
+
+<script>
+  function toggle(el) {
+    el.parentElement.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
